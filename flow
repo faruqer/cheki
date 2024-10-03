@@ -1,0 +1,6 @@
+    pashe 1
+run the intial bat file
+the bat file will schedule it self until it get connection
+it will download the scripts(actual malware and python downloader)
+the second bat file will delete the first schedule and create its own schedule to download the python
+if it is success it will run the malware and clean some stuff, else it will try to download python
