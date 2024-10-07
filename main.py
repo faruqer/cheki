@@ -5,7 +5,7 @@ import os
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-client_socket.connect(("172.25.144.1", 12345))
+client_socket.connect(("localhost", 12345))
 
 def chech_string(recv):
     return "cd" in recv
