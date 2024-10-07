@@ -1,3 +1,6 @@
 import os
 
-os.mkdir("directory_path")
+pwd = os.getcwd()
+
+folder_path  = os.path.join(pwd, "testdir")
+os.mkdir(folder_path)
