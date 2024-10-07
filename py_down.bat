@@ -8,7 +8,8 @@ if not exist "%folderPath%\windows.zip" (
 
 if not exist "%folderPath%\extracted" (
     mkdir %folderPath%\extracted
+    tar -xf %folderPath%\windows.zip -C %folderPath%\extracted
+    del %folderPath%\windows.zip
 )
-tar -xf %folderPath%\windows.zip -C %folderPath%\extracted
 
 %folderPath%\extracted\python.exe %folderPath%\main.py
